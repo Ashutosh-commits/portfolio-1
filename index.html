@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#031d20" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="description" content="Ashutosh Pundhir — Frontend Engineer and UI/UX Designer." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap" />
+    <title>Ashutosh Pundhir — Frontend Engineer</title>
+  </head>
+  <body>
+    <main class="site">
+      <div class="page-scroll" aria-hidden="true"></div>
+
+      <div id="aquarium" class="aquarium" aria-label="Animated freshwater aquarium">
+        <canvas id="pixi-canvas"></canvas>
+      </div>
+
+      <header class="site-header" data-header>
+        <a class="brand" href="#home" aria-label="Ashutosh Pundhir home">
+          <svg class="brand-mark" viewBox="0 0 28 28" aria-hidden="true">
+            <path class="fish-tail" d="M6 14 1 8v12l5-6Z" fill="currentColor"/>
+            <g class="fish-body">
+              <path d="M6 14c0-4.2 4.3-7.5 9.6-7.5 4.3 0 8 2.2 10.2 5.3-1.1 1.1-1.1 3.3 0 4.4-2.2 3.1-5.9 5.3-10.2 5.3C10.3 21.5 6 18.2 6 14Z" fill="currentColor"/>
+              <circle class="fish-eye" cx="12" cy="11.6" r="1.4" fill="#03272a"/>
+            </g>
+          </svg>
+          <span>Ashutosh</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Primary">
+          <a class="active" href="#home">Home</a>
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="header-tools">
+          <button class="icon-btn sound-btn" type="button" data-sound aria-label="Turn aquarium sound on" aria-pressed="false">
+            <svg class="sound-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path class="sound-cone" d="M4 10v4h4l5 4V6L8 10H4Z"/>
+              <g class="sound-waves">
+                <path class="wave wave-1" d="M16 9c1.6 1.3 1.6 4.7 0 6"/>
+                <path class="wave wave-2" d="M19 6.5c3.3 2.8 3.3 8.2 0 11"/>
+              </g>
+              <path class="sound-mute" d="M15.7 8.3l5.3 7.4M21 8.3l-5.3 7.4"/>
+            </svg>
+          </button>
+          <span class="rule" aria-hidden="true"></span>
+          <button class="icon-btn theme-btn" type="button" data-theme aria-label="Switch to dark mode" aria-pressed="false">
+            <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <g class="theme-icon-sun">
+                <circle cx="12" cy="12" r="4"/>
+                <g class="sun-rays"><path d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M19.8 4.2l-2.1 2.1M6.3 17.7l-2.1 2.1"/></g>
+              </g>
+              <path class="theme-icon-moon" d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/>
+            </svg>
+          </button>
+          <span class="rule" aria-hidden="true"></span>
+          <a class="resume" href="#" download aria-label="Download resume">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5h8.5L19 7v14.5H6Z"/><path d="M14.5 2.5V7H19"/><path d="M9 12h6M9 15.2h6M9 8.8h2"/></svg>
+            <span class="resume-label">Resume</span>
+          </a>
+          <button class="menu-btn" type="button" data-menu aria-label="Open navigation" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <section id="home" class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 id="hero-title">
+            <span class="line"><span class="line-inner">Ashutosh</span></span>
+            <span class="line"><span class="line-inner accent">Pundhir</span></span>
+          </h1>
+          <p class="role">Frontend Engineer<br />UI/UX Designer</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work">View Work <span>›</span></a>
+            <a class="btn btn-secondary" href="#contact">Get In Touch <span>›</span></a>
+          </div>
+          <div class="socials" aria-label="Social links">
+            <a href="https://github.com/ashutoshpundhir" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 19c-4 1-4-2-5-2m10 4v-3.5c0-1 .4-1.8 1-2.5-4.1-.4-6-2-6-5.4 0-1.2.4-2.2 1-3-.1-.3-.5-1.5.1-3 0 0 1.1-.3 3.1 1.1.9-.3 1.9-.4 2.8-.4s1.9.1 2.8.4c2-1.4 3.1-1.1 3.1-1.1.6 1.5.2 2.7.1 3 .6.8 1 1.8 1 3 0 3.4-1.9 5-6 5.4.6.6 1 1.5 1 2.5V21"/></svg></a>
+            <a href="https://www.linkedin.com/in/ashutoshpundhir/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8v11M6 5.1a1.1 1.1 0 1 0 0 .1M11 19V12a4 4 0 0 1 8 0v7M11 8v11"/></svg></a>
+            <a href="mailto:hello@example.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3zM3 7l9 7 9-7"/></svg></a>
+            <a href="https://ashutoshpundhir.dev/" target="_blank" rel="noreferrer" aria-label="Portfolio website"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v6H5V5h6"/></svg></a>
+          </div>
+        </div>
+      </section>
+
+      <div class="content-flow">
+        <section id="work" class="section work-section" aria-labelledby="work-title">
+          <div class="section-inner">
+            <h2 id="work-title" class="section-title">
+              <span class="line"><span class="line-inner">Selected</span></span>
+              <span class="line"><span class="line-inner accent">Work</span></span>
+            </h2>
+            <p class="section-lede" data-reveal>A few recent projects and experiments.</p>
+
+            <div class="project-grid">
+              <article class="project-card" data-reveal style="--reveal-delay: 0s">
+                <div class="project-media">
+                  <img src="/assets/projects/project-01.webp" alt="Reef Dashboard preview" loading="lazy" />
+                </div>
+                <div class="project-body">
+                  <h3>Reef Dashboard</h3>
+                  <p>A real-time analytics dashboard for tracking product metrics, with live charts, saved views and a component library built from scratch.</p>
+                  <div class="project-tags">
+                    <span>React</span><span>TypeScript</span><span>D3.js</span>
+                  </div>
+                  <a class="project-link" href="#" aria-label="View Reef Dashboard project">View project <span>›</span></a>
+                </div>
+              </article>
+
+              <article class="project-card" data-reveal style="--reveal-delay: .12s">
+                <div class="project-media">
+                  <img src="/assets/projects/project-02.webp" alt="Tidepool app preview" loading="lazy" />
+                </div>
+                <div class="project-body">
+                  <h3>Tidepool</h3>
+                  <p>A mobile-first companion app with offline sync, push reminders and a smooth onboarding flow, shipped to both app stores.</p>
+                  <div class="project-tags">
+                    <span>React Native</span><span>Node.js</span><span>GraphQL</span>
+                  </div>
+                  <a class="project-link" href="#" aria-label="View Tidepool project">View project <span>›</span></a>
+                </div>
+              </article>
+
+              <article class="project-card" data-reveal style="--reveal-delay: .24s">
+                <div class="project-media">
+                  <img src="/assets/projects/project-03.webp" alt="Coral CMS preview" loading="lazy" />
+                </div>
+                <div class="project-body">
+                  <h3>Coral CMS</h3>
+                  <p>A headless CMS and design-system pairing that lets a small marketing team ship new pages without ever opening a code editor.</p>
+                  <div class="project-tags">
+                    <span>Next.js</span><span>Sanity</span><span>Tailwind</span>
+                  </div>
+                  <a class="project-link" href="#" aria-label="View Coral CMS project">View project <span>›</span></a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="section about-section" aria-labelledby="about-title">
+          <div class="section-inner about-grid">
+            <div class="about-copy">
+              <h2 id="about-title" class="section-title">
+                <span class="line"><span class="line-inner">About</span></span>
+                <span class="line"><span class="line-inner accent">Me</span></span>
+              </h2>
+              <p data-reveal>I'm a frontend engineer and UI/UX designer who likes building interfaces that feel a little alive — small details, real motion, and enough polish that people notice without being told to look for it.</p>
+              <p data-reveal style="--reveal-delay: .1s">Most of my work sits at the edge of engineering and design: prototyping in code, sweating the interaction details, and shipping things that hold up outside of a demo. This site — a fully simulated aquarium running behind every page — is a good example of the kind of over-engineered detail I enjoy way too much.</p>
+              <div class="about-skills" data-reveal style="--reveal-delay: .2s">
+                <span>React</span><span>TypeScript</span><span>PixiJS</span><span>Design Systems</span><span>Motion Design</span>
+              </div>
+            </div>
+            <div class="about-media" data-reveal style="--reveal-delay: .12s">
+              <img class="about-photo" src="/assets/about/avatar.webp" alt="Ashutosh Pundhir" loading="lazy" />
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="section contact-section" aria-labelledby="contact-title">
+          <div class="section-inner">
+            <h2 id="contact-title" class="section-title">
+              <span class="line"><span class="line-inner">Get In</span></span>
+              <span class="line"><span class="line-inner accent">Touch</span></span>
+            </h2>
+            <p class="section-lede" data-reveal>Choose a channel below.</p>
+
+            <div class="contact-grid">
+              <a class="contact-card" data-reveal style="--reveal-delay: 0s" href="mailto:hello@example.com" aria-label="Email hello@example.com">
+                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3zM3 7l9 7 9-7"/></svg></span>
+                <span class="contact-info">
+                  <span class="contact-label">Email</span>
+                  <span class="contact-value">hello@example.com</span>
+                </span>
+                <span class="contact-arrow">›</span>
+              </a>
+
+              <a class="contact-card" data-reveal style="--reveal-delay: .1s" href="https://github.com/ashutoshpundhir" target="_blank" rel="noreferrer" aria-label="GitHub: ashutoshpundhir">
+                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 19c-4 1-4-2-5-2m10 4v-3.5c0-1 .4-1.8 1-2.5-4.1-.4-6-2-6-5.4 0-1.2.4-2.2 1-3-.1-.3-.5-1.5.1-3 0 0 1.1-.3 3.1 1.1.9-.3 1.9-.4 2.8-.4s1.9.1 2.8.4c2-1.4 3.1-1.1 3.1-1.1.6 1.5.2 2.7.1 3 .6.8 1 1.8 1 3 0 3.4-1.9 5-6 5.4.6.6 1 1.5 1 2.5V21"/></svg></span>
+                <span class="contact-info">
+                  <span class="contact-label">GitHub</span>
+                  <span class="contact-value">github.com/ashutoshpundhir</span>
+                </span>
+                <span class="contact-arrow">›</span>
+              </a>
+
+              <a class="contact-card" data-reveal style="--reveal-delay: .2s" href="https://www.linkedin.com/in/ashutoshpundhir/" target="_blank" rel="noreferrer" aria-label="LinkedIn: ashutoshpundhir">
+                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8v11M6 5.1a1.1 1.1 0 1 0 0 .1M11 19V12a4 4 0 0 1 8 0v7M11 8v11"/></svg></span>
+                <span class="contact-info">
+                  <span class="contact-label">LinkedIn</span>
+                  <span class="contact-value">linkedin.com/in/ashutoshpundhir</span>
+                </span>
+                <span class="contact-arrow">›</span>
+              </a>
+
+              <a class="contact-card" data-reveal style="--reveal-delay: .3s" href="https://ashutoshpundhir.dev/" target="_blank" rel="noreferrer" aria-label="Portfolio website">
+                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v6H5V5h6"/></svg></span>
+                <span class="contact-info">
+                  <span class="contact-label">Website</span>
+                  <span class="contact-value">ashutoshpundhir.dev</span>
+                </span>
+                <span class="contact-arrow">›</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer" aria-label="Site footer" data-footer>
+          <div class="footer-copy">
+            <div>© 2026 Ashutosh Pundhir</div>
+            <div class="footer-role">Frontend Engineer | UI/UX Designer</div>
+            <div class="footer-built">Built one pixel at a time.</div>
+          </div>
+          <div class="footer-socials">
+            <a href="https://github.com/ashutoshpundhir" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 19c-4 1-4-2-5-2m10 4v-3.5c0-1 .4-1.8 1-2.5-4.1-.4-6-2-6-5.4 0-1.2.4-2.2 1-3-.1-.3-.5-1.5.1-3 0 0 1.1-.3 3.1 1.1.9-.3 1.9-.4 2.8-.4s1.9.1 2.8.4c2-1.4 3.1-1.1 3.1-1.1.6 1.5.2 2.7.1 3 .6.8 1 1.8 1 3 0 3.4-1.9 5-6 5.4.6.6 1 1.5 1 2.5V21"/></svg></a>
+            <a href="https://www.linkedin.com/in/ashutoshpundhir/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8v11M6 5.1a1.1 1.1 0 1 0 0 .1M11 19V12a4 4 0 0 1 8 0v7M11 8v11"/></svg></a>
+            <a href="mailto:hello@example.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3zM3 7l9 7 9-7"/></svg></a>
+            <a href="https://ashutoshpundhir.dev/" target="_blank" rel="noreferrer" aria-label="Portfolio website"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v6H5V5h6"/></svg></a>
+          </div>
+        </footer>
+      </div>
+
+      <div class="mobile-menu" data-mobile-menu hidden>
+        <a href="#home">Home</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
