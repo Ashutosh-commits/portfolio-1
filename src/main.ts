@@ -1,3 +1,4 @@
+import 'pixi.js/unsafe-eval';
 import { Application, Container } from 'pixi.js';
 import gsap from 'gsap';
 import { AquariumScene } from './aquarium';
