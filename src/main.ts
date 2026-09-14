@@ -15,6 +15,46 @@ async function boot() {
   const mobileMenu = document.querySelector<HTMLElement>('[data-mobile-menu]');
   const footer = document.querySelector<HTMLElement>('[data-footer]');
 
+  const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>(
+    '.main-nav a[href^=\"#\"], [data-mobile-menu] a[href^=\"#\"]',
+  ));
+  const sectionIds = ['home', 'work', 'about', 'contact'] as const;
+  const setActiveSection = (id: string) => {
+    navLinks.forEach((link) => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+    });
+  };
+  const scrollToSection = (id: string, behavior: ScrollBehavior = 'smooth') => {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior });
+    } else {
+      const heading = target.querySelector<HTMLElement>('.section-title');
+      const targetTop = heading
+        ? heading.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 24
+        : target.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 24;
+      window.scrollTo({ top: Math.max(0, targetTop), behavior });
+    }
+    setActiveSection(id);
+  };
+
+  const updateNavigation = () => {
+    const activationLine = header.offsetHeight + 28;
+    let active: (typeof sectionIds)[number] = 'home';
+
+    for (const id of sectionIds.slice(1)) {
+      const section = document.getElementById(id);
+      if (!section) continue;
+      const heading = section.querySelector<HTMLElement>('.section-title');
+      const top = (heading ?? section).getBoundingClientRect().top;
+      if (top <= activationLine) active = id;
+    }
+
+    setActiveSection(active);
+  };
+
   if (!canvas || !aquarium || !pageScroll || !header || !hero || !mobileMenu || !footer) {
     throw new Error('Missing required portfolio elements');
   }
@@ -36,6 +76,7 @@ async function boot() {
   const scene = new AquariumScene(app, root, prefersReducedMotion.matches);
   await scene.load();
   scene.layout();
+  document.documentElement.classList.remove('js-loading');
 
   const syncScrollRange = () => {
     scene.layout();
@@ -53,6 +94,7 @@ async function boot() {
     hero.classList.toggle('scrolled-away', heroHidden);
     hero.toggleAttribute('inert', heroHidden);
     scene.setScrollProgress(progress);
+    updateNavigation();
   };
 
   window.addEventListener('resize', syncScrollRange, { passive: true });
@@ -116,7 +158,11 @@ async function boot() {
 
   const brand = document.querySelector<HTMLAnchorElement>('.brand');
   const brandMark = brand?.querySelector<SVGElement>('.brand-mark');
-  brand?.addEventListener('click', () => {
+  brand?.addEventListener('click', (event) => {
+    event.preventDefault();
+    scrollToSection('home');
+    history.replaceState(null, '', '#home');
+
     if (prefersReducedMotion.matches || !brandMark) return;
 
     brandMark.classList.remove('dash');
@@ -149,6 +195,24 @@ async function boot() {
       mobileMenu.classList.remove('open');
     });
   });
+
+  document.querySelectorAll<HTMLAnchorElement>('[href^=\"#\"]').forEach((link) => {
+    const targetId = link.getAttribute('href')?.slice(1);
+    if (!targetId || !sectionIds.includes(targetId as (typeof sectionIds)[number])) return;
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      scrollToSection(targetId);
+      history.replaceState(null, '', `#${targetId}`);
+      if (mobileMenu.contains(link)) {
+        menu?.setAttribute('aria-expanded', 'false');
+        mobileMenu.hidden = true;
+        mobileMenu.classList.remove('open');
+      }
+    });
+  });
+
+  setActiveSection(window.location.hash.slice(1) || 'home');
+  updateNavigation();
 
   if (!prefersReducedMotion.matches) {
 

@@ -45,7 +45,7 @@ button { border: 0; background: transparent; font: inherit; cursor: pointer; }
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: #021a1d;
+  background: #021a1d url('/assets/world-environment.webp') center / cover no-repeat;
 }
 
 #aquarium canvas {
@@ -54,6 +54,9 @@ button { border: 0; background: transparent; font: inherit; cursor: pointer; }
   width: 100%;
   height: 100%;
   image-rendering: pixelated;
+  touch-action: pan-y pinch-zoom;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .aquarium::after {
@@ -528,7 +531,14 @@ h1 .accent { color: var(--lime); }
 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; clip-path: inset(50%); }
 
-.content-flow { position: relative; z-index: 10; }
+.content-flow { position: relative; z-index: 10; touch-action: pan-y; }
+
+/* Keep the canvas interactive for fauna taps while allowing vertical page swipes. */
+.aquarium { touch-action: pan-y pinch-zoom; }
+
+/* Keep the first paint visually coherent while the Pixi scene is booting. */
+html.js-loading .hero-copy { opacity: 0; }
+html.js-loading .site-header { opacity: 1; }
 
 .section { position: relative; padding: 120px 0; }
 

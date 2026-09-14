@@ -172,6 +172,7 @@ export class AquariumScene {
     this.world.sortableChildren = true;
     this.app.stage.eventMode = 'static';
     this.world.eventMode = 'static';
+    this.app.canvas.style.touchAction = 'pan-y pinch-zoom';
     this.app.canvas.addEventListener('pointerdown', (event) => this.handlePointer(event, true));
     this.app.ticker.add((ticker) => {
       const dt = Math.min(ticker.deltaMS / 1000, 0.05);
@@ -202,29 +203,20 @@ export class AquariumScene {
       '/assets/betta/8.png',
     ];
     const loadFrames = async (urls: string[], label: string) => {
-      const frames: Texture[] = [];
-      for (const url of urls) {
-        const frame = await Assets.load(url) as Texture;
-        frame.source.style.scaleMode = 'nearest';
-        frame.label = `${label}-${frames.length + 1}`;
-        frames.push(frame);
-      }
+      const frames = await Promise.all(
+        urls.map(async (url, index) => {
+          const frame = await Assets.load(url) as Texture;
+          frame.source.style.scaleMode = 'nearest';
+          frame.label = `${label}-${index + 1}`;
+          return frame;
+        }),
+      );
       return frames;
     };
 
-    const [betta, red, yellow, nerite, ramshorn] = await Promise.all([
-      loadFrames(bettaUrls, 'Betta'),
-      loadFrames(Array.from({ length: 8 }, (_, i) => `/assets/fauna/red-idle-${String(i + 1).padStart(2, '0')}.webp`), 'red shrimp'),
-      loadFrames(Array.from({ length: 8 }, (_, i) => `/assets/fauna/yellow-idle-${String(i + 1).padStart(2, '0')}.webp`), 'yellow shrimp'),
-      loadFrames(Array.from({ length: 8 }, (_, i) => `/assets/fauna/nerite-crawl-${String(i + 1).padStart(2, '0')}.webp`), 'Nerite snail'),
-      loadFrames(Array.from({ length: 8 }, (_, i) => `/assets/fauna/ramshorn-crawl-${String(i + 1).padStart(2, '0')}.webp`), 'Ramshorn snail'),
-    ]);
-
-    this.bettaFrames = betta;
-    this.redShrimpFrames = red;
-    this.yellowShrimpFrames = yellow;
-    this.neriteFrames = nerite;
-    this.ramshornFrames = ramshorn;
+    // The background + Betta are the critical first-paint assets. Start the page
+    // as soon as those are ready and stream the rest of the fauna in afterwards.
+    this.bettaFrames = await loadFrames(bettaUrls, 'Betta');
 
     this.fish = new Sprite(this.bettaFrames[0]);
     this.fish.anchor.set(0.5);
@@ -244,6 +236,25 @@ export class AquariumScene {
     this.bettaTargetX = 1370;
     this.bettaTargetY = 430;
 
+    void (async () => {
+      const [red, yellow, nerite, ramshorn] = await Promise.all([
+        loadFrames(Array.from({ length: 8 }, (_, i) => `/assets/fauna/red-idle-${String(i + 1).padStart(2, '0')}.webp`), 'red shrimp'),
+        loadFrames(Array.from({ length: 8 }, (_, i) => `/assets/fauna/yellow-idle-${String(i + 1).padStart(2, '0')}.webp`), 'yellow shrimp'),
+        loadFrames(Array.from({ length: 8 }, (_, i) => `/assets/fauna/nerite-crawl-${String(i + 1).padStart(2, '0')}.webp`), 'Nerite snail'),
+        loadFrames(Array.from({ length: 8 }, (_, i) => `/assets/fauna/ramshorn-crawl-${String(i + 1).padStart(2, '0')}.webp`), 'Ramshorn snail'),
+      ]);
+
+      this.redShrimpFrames = red;
+      this.yellowShrimpFrames = yellow;
+      this.neriteFrames = nerite;
+      this.ramshornFrames = ramshorn;
+      this.createFauna();
+    })().catch((error) => {
+      console.error('Aquarium fauna failed to load', error);
+    });
+  }
+
+  private createFauna() {
     const shrimpSpec: Array<{ zone: number; speed: number; color: AnimalColor; seed: number }> = [
       { zone: 0, speed: 12, color: 'red', seed: 17 },
       { zone: 2, speed: 9, color: 'red', seed: 31 },
